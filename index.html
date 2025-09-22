@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Schemes Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .page-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .scheme-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .scheme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .domain-button {
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .domain-button:hover {
+            transform: scale(1.05);
+            background-color: #4a5568;
+        }
+        .modal-item-title {
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-gray-800 text-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between flex-wrap">
+            <a href="#" class="text-2xl font-bold rounded-lg px-2 py-1 hover:bg-gray-700 transition" onclick="showPage('home-page')">SchemeSavvy</a>
+            <div class="flex items-center">
+                <a href="#about" class="mx-3 hover:text-gray-300 transition hidden md:block">About Us</a>
+                <a href="#motive" class="mx-3 hover:text-gray-300 transition hidden md:block">Our Motive</a>
+                <a href="#contact" class="mx-3 hover:text-gray-300 transition hidden md:block">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 text-white transition-all duration-300 ease-in-out">
+            <a href="#about" class="block py-2 px-6 hover:bg-gray-700" onclick="hideMobileMenu()">About Us</a>
+            <a href="#motive" class="block py-2 px-6 hover:bg-gray-700" onclick="hideMobileMenu()">Our Motive</a>
+            <a href="#contact" class="block py-2 px-6 hover:bg-gray-700" onclick="hideMobileMenu()">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- Home Page -->
+        <div id="home-page" class="page-content active">
+            <section class="bg-white rounded-xl shadow-lg p-8 text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-4">Empowering India Through Information</h1>
+                <p class="text-lg md:text-xl text-gray-600 mb-8">Your one-stop platform to discover and understand government schemes across various sectors.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <button class="domain-button bg-gray-800 text-white py-4 px-6 rounded-xl shadow-lg hover:bg-gray-700 transition transform" onclick="showDomain('Farming')">
+                        <div class="text-2xl font-semibold">Farming</div>
+                    </button>
+                    <button class="domain-button bg-gray-800 text-white py-4 px-6 rounded-xl shadow-lg hover:bg-gray-700 transition transform" onclick="showDomain('Business')">
+                        <div class="text-2xl font-semibold">Business</div>
+                    </button>
+                    <button class="domain-button bg-gray-800 text-white py-4 px-6 rounded-xl shadow-lg hover:bg-gray-700 transition transform" onclick="showDomain('Education')">
+                        <div class="text-2xl font-semibold">Education</div>
+                    </button>
+                    <button class="domain-button bg-gray-800 text-white py-4 px-6 rounded-xl shadow-lg hover:bg-gray-700 transition transform" onclick="showDomain('Health')">
+                        <div class="text-2xl font-semibold">Health</div>
+                    </button>
+                    <button class="domain-button bg-gray-800 text-white py-4 px-6 rounded-xl shadow-lg hover:bg-gray-700 transition transform" onclick="showDomain('Sports')">
+                        <div class="text-2xl font-semibold">Sports</div>
+                    </button>
+                    <button class="domain-button bg-gray-800 text-white py-4 px-6 rounded-xl shadow-lg hover:bg-gray-700 transition transform" onclick="showDomain('Construction')">
+                        <div class="text-2xl font-semibold">Construction</div>
+                    </button>
+                    <button class="domain-button bg-gray-800 text-white py-4 px-6 rounded-xl shadow-lg hover:bg-gray-700 transition transform" onclick="showDomain('Women Empowerment')">
+                        <div class="text-2xl font-semibold">Women Empowerment</div>
+                    </button>
+                </div>
+            </section>
+
+            <section id="motive" class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Motive and Aim</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    Our primary goal is to bridge the information gap between the government and its citizens. Many people, especially in rural and underserved areas, are unaware of the beneficial schemes launched for them. We aim to be a simple, accessible, and comprehensive platform that provides clear, concise, and accurate information about various government schemes. By making this information readily available, we hope to empower individuals and families to take advantage of the opportunities designed to improve their lives, livelihoods, and overall well-being.
+                </p>
+            </section>
+
+            <section id="about" class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">About Us</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    We are a dedicated team committed to social empowerment through digital literacy. Our platform is a community-driven project designed to simplify complex government information and present it in an easy-to-understand format. We believe that access to information is a fundamental right, and our work is a step towards ensuring that no one is left behind due to a lack of awareness. We continuously update our database to include the latest schemes and policies to serve as a reliable resource for everyone.
+                </p>
+            </section>
+
+            <section id="contact" class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Contact Us</h2>
+                <div class="text-gray-600 leading-relaxed">
+                    <p>For any queries or suggestions, please feel free to reach out to us.</p>
+                    <p class="mt-2"><strong>Email:</strong> info@schemesavvy.in</p>
+                    <p><strong>Phone:</strong> +91-9876543210</p>
+                    <p><strong>Address:</strong> Community Engagement Project, XYZ Building, New Delhi, India</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Dynamic Scheme List Page -->
+        <div id="schemes-page" class="page-content">
+            <button onclick="showPage('home-page')" class="bg-gray-800 text-white py-2 px-4 rounded-xl shadow-lg hover:bg-gray-700 transition mb-4">
+                &larr; Back to Home
+            </button>
+            <h2 id="schemes-heading" class="text-3xl font-bold text-gray-800 mb-6"></h2>
+            <div id="schemes-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Scheme buttons will be injected here by JS -->
+            </div>
+        </div>
+
+        <!-- Scheme Detail Modal -->
+        <div id="scheme-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+            <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 relative">
+                <button onclick="hideModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <div id="modal-content" class="mt-4">
+                    <!-- Scheme details will be injected here by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert/Message Box -->
+        <div id="alert-box" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 hidden transition-opacity duration-300">
+            Content not found.
+        </div>
+    </main>
+
+    <script>
+        const data = {
+            "Sports": {
+                "Pandit Deendayal Upadhyay National Welfare Fund For Sportspersons": {
+                    "details": "Launched by Ministry of Youth Affairs & Sports to aid meritorious sportspersons in indigent circumstances. Covers families of deceased sportspersons and special cases via Chairperson's discretion.",
+                    "benefits": "Lump sum up to ₹10 lakh, ₹5,000 monthly pension, injury aid, medical aid, and training/equipment support.",
+                    "eligibility": "Retired national/international achievers, coaches, referees, and support staff.",
+                    "application": "Apply offline/online with mandatory PDF documents (max 5MB).",
+                    "documents": "Applicant's passport-size photo and signature, Proof of Age / Date of Birth, Proof of achievements/participation in national or international sports events, Bank details, Mandate form, Copy of cancelled cheque, Annual income proof (from all sources), Declaration signed by the applicant and two witnesses, Mobile number and email ID (for online application), Contact: 18002025155/18002585155, section.sp4.moyas@gov.in.",
+                    "youtube": "https://youtu.be/mqoeOMu0Oec?si=yjCcBRcnO51KO1RF",
+                    "registration": "swayam.mahaonline.gov.in??Length=0"
+                },
+                "Tenzing Norgay National Adventure Award": {
+                    "details": "National award for outstanding achievements in Land, Water, Air Adventure and Lifetime Achievement. Winners get ₹15 lakh, bronze statuette, certificate, blazer/saree, and travel & lodging support.",
+                    "eligibility": "Exceptional performance in past 3 years; full career for Lifetime Achievement.",
+                    "application": "Online via awards.gov.in. Nominations: By State departments, recognized adventure organizations, or armed/para-military forces.",
+                    "documents": "Passport-size photograph, Proof of identity (Aadhaar, Passport, PAN, etc.), Proof of address (Aadhaar, Voter ID, etc.), Proof of age (10th mark sheet, birth certificate, etc.), Educational qualification proof, Detailed achievement description (as per award guidelines), High-resolution action photographs of adventure activities (if selected), Bank mandate form (if selected), Clothing measurements for blazer/saree (if selected).",
+                    "youtube": "https://youtu.be/lFPp4YD7y6Q?si=52ABPX2U8JdDm9qU",
+                    "registration": "https://awards.gov.in/"
+                },
+                "Award Of Scholarships To Young Artists In Different Cultural Fields": {
+                    "details": "Organizer: Ministry of Culture, Government of India. Purpose: Support advanced training in Indian Classical Music/Dance, Theatre, Visual Arts, Folk/Traditional Arts, and Light Classical Music. No. of Scholarships: 400 per year.",
+                    "benefits": "₹5,000 per month for 2 years. Covers living, travel, and training expenses.",
+                    "eligibility": "Indian citizens aged 18-25 years with minimum 5 years of training and proven proficiency.",
+                    "application": "Apply online via CSMS portal. Selection Process: Scrutiny + interview/performance before an Expert Committee.",
+                    "documents": "Recent passport-size photograph, Proof of date of birth (Birth certificate, 10th marksheet, Aadhaar, etc.), Proof of address (Aadhaar, Voter ID, Passport, etc.), Proof of Indian citizenship (Passport, Aadhaar, Voter ID), Educational qualification certificate, Training proof (Certificate from guru/institution showing minimum 5 years of training), Achievement proof (Awards, recognitions, performance participation certificates), Portfolio materials (Photographs, videos, or samples of work if applicable), Bank account details (Cancelled cheque or passbook copy).",
+                    "youtube": "https://youtu.be/DJO-G3Kvo58?si=JJxvYQsnRx3C7EUZ",
+                    "registration": "https://www.indiaculture.gov.in/search/node/Award%20Of%20Scholarships%20To%20Young%20Artists%20In%20Different%20Cultural%20Fields"
+                },
+                "Free Education For Sports Medal Winners / Participants Of National/ International Events": {
+                    "details": "Organizer: University Grants Commission (UGC), Government of India. Purpose: Provide free higher education to medal winners at national level and participants at international level.",
+                    "benefits": "Tuition fees, hostel fees, sports kit allowance, and stipend (amount varies by competition level).",
+                    "eligibility": "Must be a medalist at national level or participant at international level, admitted to a UGC-recognized institution.",
+                    "application": "Submit application via institution with proof of sports achievement. Institution Role: Forward applications, performance reports, utilization certificates, and justifications to UGC.",
+                    "documents": "Passport-size photograph (recent), Proof of date of birth (Birth certificate, 10th marksheet, Aadhaar, etc.), Proof of address (Aadhaar, Voter ID, Passport, etc.), Proof of Indian citizenship (Passport, Aadhaar, Voter ID), Sports achievement certificate (National medal or international participation certificate from recognized sports body), Admission/Enrollment proof from UGC-recognized institution, Previous academic mark sheets/certificates, Bank account details (Cancelled cheque or passbook copy), No objection/forwarding letter from the institution, Undertaking regarding academic and sports performance.",
+                    "youtube": "https://youtu.be/cM1EoESb_RE?si=Aj8T475NcGxP735e",
+                    "registration": "http://rajshaladarpan.nic.in/sd3/SportsNew/School/Sports_FilledApplication.aspx"
+                },
+                "Scheme For Financial Assistance For Veteran Artists": {
+                    "details": "Organizer: Ministry of Culture, Government of India. Benefit: ₹6,000 per month pension to senior artists, scholars, and writers in financial need. Funding: Jointly by Central Government and State/UT Governments. Pension disbursed via DBT/PFMS. Posthumous Benefit: Spouse may receive pension if applied within stipulated time after the artist's death.",
+                    "eligibility": "Age 60+ years. Personal income below ₹4,000 per month. Significant contribution to art, culture, or literature.",
+                    "application": "Submit application with supporting documents. Reviewed by Expert Committee.",
+                    "documents": "Proof of Address - Aadhaar, utility bill, voter ID, etc., Proof of Date of Birth - Birth certificate, 10th marksheet, or equivalent., Income Certificate - Issued by competent authority showing income below ₹4,000/month., Proof of Contribution - Certificates, awards, media coverage, or published works in art, culture, or literature., Bank Details - Cancelled cheque or bank passbook copy for DBT., Passport-size photograph.",
+                    "youtube": "https://youtu.be/2k8OztSBF-w?si=LUIYoBPjOpsTDWgN",
+                    "registration": "https://www.indsarkarinaukri.in/2015/..."
+                },
+                "Scheme For Award Of Senior/Junior Fellowships To Outstanding Persons In The Fields Of Culture": {
+                    "details": "Aims to encourage excellence in art, culture, and literature through research and creative projects.",
+                    "benefits": "Senior Fellowship: ₹20,000/month for 2 years; Junior Fellowship: ₹10,000/month for 2 years.",
+                    "eligibility": "Senior: age 40+. Junior: age 25-40. Open to performing arts, literary arts, plastic arts, and cultural research.",
+                    "application": "Apply online via Ministry of Culture or CCRT. Selection by expert panels; juniors undergo interviews. Mandatory 6-month progress reports; completion in 2 years.",
+                    "exclusions": "Not applicable for training, workshops, fiction, or autobiographies.",
+                    "documents": "Proof of Identity* - Aadhaar card, Passport, or Voter ID., Proof of Address* - Aadhaar, utility bill, voter ID, etc., Proof of Date of Birth* - Birth certificate, 10th marksheet, or equivalent., Educational Qualification Certificates* - Relevant to the applied field., Proof of Experience/Work* - Awards, publications, certificates, performances, exhibitions, etc., Detailed Project Proposal* - Clearly outlining objectives, methodology, and expected outcomes., Passport-size Photograph* - Recent., Bank Details* - Cancelled cheque or passbook copy for direct transfer.",
+                    "youtube": "https://youtu.be/Jln8Lj_G7Mc?si=NKNETNjqsUzFDehb",
+                    "registration": "https://ccrtindia.gov.in/"
+                }
+            },
+            "Farming": {
+                "PM Kisan": {
+                    "details": "Launched by: Ministry of Agriculture & Farmers' Welfare, Government of India. Launched in February 2019. Objective: To provide direct income support to farmer families to meet their agricultural and household needs. To reduce financial stress and ensure livelihood security for farmers.",
+                    "benefits": "₹6,000 per year per farmer family. Paid in three equal installments of ₹2,000 each. Amount transferred directly to bank accounts.",
+                    "eligibility": "All landholding farmer families with cultivable land records. Farmers must have Aadhaar-linked bank accounts. Includes small marginal, and medium farmers.",
+                    "exclusions": "Institutional landholders. Farmers or family members who are: income tax payers, serving/retired government employees (except Group D/multi-tasking staff), professionals such as doctors, engineers, lawyers, CA, former/current MPs, MLAs, Ministers, and high constitution post holders.",
+                    "application": "PM-KISAN official portal (pmkisan.gov.in), Common Service Centres (CSCs), Local revenue/agriculture offices.",
+                    "documents": "Aadhaar Card, Bank Account Details, Land Ownership Documents, Residence Proof, Income Certificate (if required by state authority), Mobile Number.",
+                    "youtube": "https://www.youtube.com/watch?v=Uq9ktF-QycY",
+                    "registration": "https://pmkisan.gov.in/homenew.aspx"
+                },
+                "PM Mudra Yojana": {
+                    "details": "Launched by: Government of India. Implemented by the Ministry of Finance through MUDRA (Micro Units Development & Refinance Agency) Bank. Launched on 8th April 2015. Objective: To provide financial support to micro and small enterprises in non-corporate, non-farm sector. To promote self-employment, entrepreneurship, and job creation.",
+                    "benefits": "Loans up to ₹10 lakh without collateral. Interest rates decided by banks as per RBI guidelines. Helps promote micro-enterprises, women entrepreneurs, and small traders. Provides credit guarantee through CGFMU.",
+                    "eligibility": "Indian citizens aged 18-65 years. Individuals, proprietors, partnership firms, small businesses, and micro-units manufacturing, trading, and services sector. Must have a business plan for income-generating activity.",
+                    "exclusions": "Farmers engaged in agriculture and allied activities (covered under NABARD schemes). Large corporate businesses or industries. Applicants with defaulted loans or poor credit history.",
+                    "application": "Apply at any commercial bank, regional rural bank (RRB), small finance bank, cooperative bank, or NBFC/MFI partnered with MUDRA. Fill out the PMMY application form and submit documents.",
+                    "documents": "Identity Proof, Address Proof, Business Proof, Business Plan/Project Report, Bank Account Details, Photographs, Caste certificate (if seeking special category benefits like SC/ST/OBC).",
+                    "youtube": "https://www.youtube.com/watch?v=SZyQ8dgx86g",
+                    "registration": "https://www.jansamarth.in/home"
+                },
+                "Pradhan Mantri Fasal Bima Yojana (PMFBY)": {
+                    "details": "Launched by: Government of India (Ministry of Agriculture & Farmers' Welfare) in 2016. Objective: Provide financial support to farmers in case of crop loss/damage due to natural calamities, pests, or diseases. Stabilize farmers' income and livelihood security. Encourage adoption of modern agricultural practices. Reduce dependence on informal credit sources and strengthen food security.",
+                    "benefits": "Low premium rates: 2% (Kharif), 1.5% (Rabi), 5% (Commercial & horticultural). Balance premium subsidized by Central & State Governments. No upper limit on government subsidy for claims. Use of technology (drones, remote sensing, mobile apps) for accurate crop loss assessment. Claims directly transferred to farmers' bank accounts.",
+                    "eligibility": "All farmers growing notified crops in notified areas. Both loanee and non-loanee farmers are eligible.",
+                    "exclusions": "Crop loss due to war, nuclear risks, malicious damage, negligence, or illegal activities not covered. Damage not linked to natural calamities, pests, or diseases is excluded.",
+                    "application": "Apply through Banks, Common Service Centres (CSCs), or official PMFBY portal. Pay premium at enrollment. Claims are settled post verification and transferred directly to farmers' bank accounts.",
+                    "documents": "Identity Proof, Land Records, Crop Sowing Certificate (if required), Bank Account Details, Photographs of farmer/crop (sometimes for verification).",
+                    "youtube": "https://www.youtube.com/watch?v=r0nq1Xd2Wts",
+                    "registration": "https://pmfby.gov.in/"
+                },
+                "Soil Health Card Scheme(2015)": {
+                    "details": "Launched by: Government of India, Ministry of Agriculture & Farmers' Welfare in 2015. Objective: To provide soil health cards to all farmers across India. Promote balanced and judicious use of fertilizers. Improve soil fertility and productivity. Provide farmers with crop-wise nutrient management practices for better yield. Reduce cost of cultivation and enhance sustainable agriculture.",
+                    "benefits": "Farmers receive individual soil health cards every 2 years. Information on soil nutrient status and fertilizer recommendations. Helps in reducing excess fertilizer usage and ensures cost savings. Improves crop yield by scientific nutrient management. Promotes eco-friendly & sustainable farming practices.",
+                    "eligibility": "All categories of farmers (small, marginal, medium, large). Farmers owning or cultivating land in India.",
+                    "exclusions": "Farmers who do not own or cultivate land are excluded. Landless laborers not engaged in cultivation are not eligible.",
+                    "application": "Soil samples collected by agriculture department officials/scientists. Testing done in soil testing laboratories (STLs). Cards issued to farmers in printed or digital form. Farmers can also register on the official portal.",
+                    "documents": "Identity Proof: Aadhaar Card / Voter ID, Land Ownership Documents: 7/12 extract, landholding certificate, or tenancy/lease papers, Photograph of farmer (for identification), Bank details (sometimes required for government record linkage).",
+                    "youtube": "https://youtu.be/SFKz_aEFfZw?si=4Jc4JEOphcDdj90n",
+                    "registration": "http://soil.health4.dac.gov.in/"
+                },
+                "Kisan Credit Card": {
+                    "details": "Launched by: Government of India in 1998, based on the recommendations of the R.V. Gupta Committee. Nodal Agencies: NABARD, RBI, and Ministry of Agriculture & Farmers' Welfare. Objective: Provide timely and adequate credit to farmers for cultivation and allied activities. Reduce farmers' dependence on moneylenders and informal credit sources.",
+                    "benefits": "Flexible credit limit depending on crop pattern and scale of finance. Farmers can withdraw money using KCC passbook, ATM-cum-debit card, or mobile banking. Interest subvention & subsidy: 7% interest rate (up to ₹3 lakh), 3% additional subsidy on timely repayment (effective rate 4%). Coverage under Crop Insurance (PMFBY/ RWBCIS) for KCC holders. Simplified and hassle-free disbursement of credit.",
+                    "eligibility": "All farmers (small, marginal, medium, large). Tenant farmers, sharecroppers, oral lessees. Joint Liability Groups (JLGs) and Self-help groups (SHGs).",
+                    "exclusions": "Non-agricultural households not engaged in farming. Defaulters of previous agricultural loans. Farmers not cultivating or without proof of cultivation rights.",
+                    "application": "Apply through Commercial Banks, Cooperative Banks, Regional Rural Banks (RRBs), or online application via respective bank websites or through the PM-Kisan portal. Submit application form along with land documents and identity proof.",
+                    "documents": "Identity Proof, Residence Proof, Land Ownership Documents, Photographs of applicant, Bank Account Details / Passbook, Income proof (if required by bank).",
+                    "youtube": "https://www.youtube.com/watch?v=lWj05R9NYMw",
+                    "registration": "https://jaankari.csccloud.in/kcc.html"
+                }
+            },
+            "Business": {
+                "Startup up India": {
+                    "details": "Launched by: Government of India, Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry. Launched on 16 January 2016. Objective: To promote entrepreneurship and build a strong ecosystem for startups. Provide funding support, mentorship, and tax benefits to startups. Encourage innovation, employment generation, and wealth creation. Simplify regulatory norms and improve ease of doing business.",
+                    "benefits": "Recognition & Certification by DPIIT. Tax exemptions: 3 consecutive years of tax holiday in the first 10 years, Exemption from capital gains tax. Easy compliance - Self-certification. Fast-tracked patent & IPR filing at reduced fees. Funding support through Fund of Funds for Startups (FFS). Credit guarantee scheme for startups. Easier public procurement norms. Incubation & mentorship support.",
+                    "eligibility": "Must be a private limited company, registered partnership firm, or LLP. Entity should be up to 10 years old. Annual turnover should not exceed ₹100 crore. Must be working towards innovation, development, deployment, or commercialization of new products, processes, or services.",
+                    "exclusions": "Should not have been formed by splitting or reconstructing an existing business.",
+                    "documents": "Certificate of Incorporation/Registration, PAN card of the startup entity, Details of business & nature of innovation, Pitch deck/business plan, PAN, Aadhaar, and identity proof of directors/partners, Bank account details of the startup, Proof of concept, Board resolution/authorization letter.",
+                    "youtube": "https://youtu.be/7hi31GVUVlE?si=2JSRbhe_pfr00p_b",
+                    "registration": "nsws.gov.in"
+                },
+                "MUDRA Yojana (PMMY)": {
+                    "details": "Launched by: Government of India, Ministry of Finance on 8 April 2015. Objective: To provide collateral-free loans to micro and small enterprises (MSEs). Promote entrepreneurship among small businesses, especially in rural & semi-urban areas. Encourage self-employment, job creation, and financial inclusion. Loan Categories (Collateral-Free): Shishu (up to ₹50,000), Kishore (₹50,001 to 5 lakh), Tarun (₹5 lakh to 10 lakh).",
+                    "benefits": "Collateral-free loans up to ₹10 lakh. Low interest rates. No processing fees for Shishu loans. Promotes women, SC/ST, minority entrepreneurs. Helps in business growth and expansion. Encourages financial literacy and inclusion through bank linkage. Coverage under Credit Guarantee Fund for Micro Units (CGFMU).",
+                    "eligibility": "Indian citizens aged 18-65 years. Individuals, proprietors, partnership firms, LLPs, private limited companies engaged in non-farm activities. Must be a micro/small enterprise. Should not be a defaulter of any bank/financial institution.",
+                    "exclusions": "Farmers engaged in agriculture and allied activities. Large corporate businesses or industries. Applicants with defaulted loans or poor credit history.",
+                    "application": "Apply at any commercial bank, regional rural bank (RRB), small finance bank, cooperative bank, or NBFC/MFI partnered with MUDRA. Fill out the PMMY application form and submit documents.",
+                    "documents": "Identity Proof, Address Proof, Business Proof, Business Plan/Project Report, Bank Account Details, Photographs, Caste certificate.",
+                    "youtube": "https://youtu.be/cn3RuR11jS4?si=H-fVduywoqBYM_vX",
+                    "registration": "https://www.jansamarth.in"
+                },
+                "PMEGP (Prime Minister’s Employment Generation Programme)": {
+                    "details": "Launched by: Government of India, Ministry of Micro, Small & Medium Enterprises (MSME). Implemented in 2008. Objective: Generate sustainable employment opportunities in rural and urban areas. Promote entrepreneurship and self-employment by establishing micro-enterprises. Provide credit-linked subsidy to unemployed youth and traditional artisans. Reduce migration of rural people to urban areas by creating local jobs.",
+                    "benefits": "Financial assistance (subsidy): General category: 15% (urban), 25% (rural). Special category: 25% (urban), 35% (rural). Loan limit: Up to ₹25 lakh for manufacturing, ₹10 lakh for service units. Encourages traditional artisans and rural skills. Support through training, guidance, and bank finance.",
+                    "eligibility": "Individuals aged 18 years and above. At least 8th standard pass (for projects above ₹10 lakh in manufacturing / ₹5 lakh in services). Self-Help Groups (SHGs), Institutions registered under Societies Registration Act, Charitable Trusts, and Co-operative Societies are eligible.",
+                    "exclusions": "Only new projects are considered. Existing units are not eligible.",
+                    "application": "Apply online through the PMEGP portal or at KVIC, KVIBs, and DICs offices. Submit application along with project report and required documents.",
+                    "documents": "Identity Proof, Address Proof, Educational Qualification Certificate (if applicable), Project Report / Business Plan, Caste/Community Certificate, Special Category Certificate, Bank account details, Passport-size photographs.",
+                    "youtube": "https://youtu.be/P4BZDosFsQw?si=FGdDcujbL2FVe6uX",
+                    "registration": "kviconline.gov.in"
+                },
+                "CGTMSE (Credit Guarantee for MSEs)": {
+                    "details": "Launched by: Government of India (Ministry of MSME) and SIDBI (Small Industries Development Bank of India). Established in 2000. Objective: To provide collateral-free credit to Micro & Small Enterprises (MSEs). Encourage banks and financial institutions to lend to MSEs without demanding third-party guarantees. Promote entrepreneurship and self-employment by easing access to credit.",
+                    "benefits": "Collateral-free loans up to ₹5 crore. Guarantee cover provided to lending institutions: up to 85% for micro enterprises (loans up to ₹5 lakh), 75%-80% cover for other categories. Encourages banks to lend more to first-time entrepreneurs. Covers both term loans and working capital loans. Facilitates credit flow to priority sectors.",
+                    "eligibility": "Micro and Small Enterprises (MSEs) engaged in manufacturing or services. Both new and existing businesses are eligible. Loans from Scheduled Commercial Banks, RRBs, SFBs, NBFCs that are members of CGTMSE. Borrower should not be a defaulter of any financial institution.",
+                    "application": "Apply for a loan at any bank that is a member of the CGTMSE trust. The bank will assess the project and apply for the guarantee cover from CGTMSE on your behalf.",
+                    "documents": "KYC documents of borrower, Business registration documents, Project Report / Business Plan, Bank account details, Income Tax Returns (ITR) (if applicable), Proof of address of business, Quotation/invoices for machinery, Application form of lending institution.",
+                    "youtube": "https://youtu.be/ekYg1TiL0Ag?si=qUuWqSPjT-6Awtc7",
+                    "registration": "https://www.cgtmse.in/"
+                },
+                "National Rural Livelihood Mission (NRLM)": {
+                    "details": "Launched by: Government of India, Ministry of Rural Development. Launched in June 2011. Objective: To reduce poverty by promoting sustainable livelihood opportunities for rural poor households. Organize rural poor, especially women, into Self-Help Groups (SHGs). Provide credit, skill development, training, and market linkages. Empower rural women socially and economically.",
+                    "benefits": "Formation of SHGs for collective savings, credit, and entrepreneurship. Interest subvention on loans for SHGs. Financial inclusion through bank linkages. Skill development & placement through DDU-GKY (linked component). Support for farm and non-farm livelihoods. Capacity building & training for rural women entrepreneurs. Enhances social empowerment of women and vulnerable groups.",
+                    "eligibility": "Rural households identified as poor in SECC 2011. Priority given to women-headed households, SC/ST households, landless households, and households with disabled members. Membership is mainly for women (18-60 years) in rural areas.",
+                    "documents": "Identity proof, Address proof, Caste certificate (if applicable), Bank account details of beneficiary/SHG, Passport-size photographs, SECC data inclusion proof, SHG formation documents.",
+                    "youtube": "https://youtu.be/AZ4TWtVLTbI?si=hA4FdgU9UCZM2Kvu",
+                    "registration": "nrlm.gov.in/"
+                }
+            },
+            "Education": {
+                "Pradhan Mantri Uchchatar Shiksha Protsahan (PM-USP) Central Sector Scheme of Scholarship for College and University students": {
+                    "details": "Launched by: Department of Higher Education, Ministry of Education. Objective: Financial aid to meritorious students from low-income families for higher studies. Coverage: 82,000 new scholarships annually for graduate/postgraduate/professional courses. Benefits: ₹12,000/year (UG first 3 years), ₹20,000/year (PG & final years of 5-year courses). Eligibility: 80th percentile in Class 12; family income ≤ ₹4.5 lakh; regular courses in recognized institutions; 75% attendance & 50% marks for renewal.",
+                    "exclusions": "Distance/correspondence, diploma, or other scholarship beneficiaries.",
+                    "application": "Via National Scholarship Portal (NSP) with OTR, Aadhaar e-KYC, document upload.",
+                    "documents": "Class 12 Marksheet, Income Certificate, Caste Certificate (if applicable), Disability Certificate (if applicable), Bonafide Certificate, Aadhaar Card, Bank Account Details, Previous Year Marksheet (for renewal).",
+                    "youtube": "https://www.youtube.com/watch?v=AqB2dMZqvMQ",
+                    "registration": "https://scholarships.gov.in"
+                },
+                "Right to Education": {
+                    "details": "Launched by: Government of India. Operationalized on 1st April 2010. Objective: To provide free and compulsory education to all children between 6-14 years. To eliminate inequality in education by ensuring quality schooling for all, especially disadvantaged groups. Coverage: All children in the age group of 6-14 years in India. Applies to government schools and mandates 25% reservation in private schools for children from weaker sections.",
+                    "benefits": "Free education including books, uniforms, and other study materials. No child can be denied admission or held back till completion of elementary education (Class 8). 25% seats reserved in private unaided schools for poor children. Ban on capitation fee, screening procedure, and corporal punishment. Ensures qualified teachers and infrastructure. Creates equal opportunities for girls, SC/ST, OBC, minorities, and economically weaker sections.",
+                    "eligibility": "Children aged 6-14 years. Children from economically weaker sections (EWS) and socially disadvantaged groups are eligible for free education in private schools (through 25% quota). Priority given to SC, ST, OBC, minorities, differently-abled, and girls.",
+                    "exclusions": "Children below 6 years and above 14 years. Higher education (secondary and college level) is not covered.",
+                    "application": "Parents apply online/offline through state government RTE admission portal or at the nearest education office.",
+                    "documents": "Birth Certificate / Age Proof, Income Certificate (for EWS applicants), Caste Certificate (if applicable), Disability Certificate (for differently-abled children), Residence Proof, Passport-size Photographs, Aadhaar Card.",
+                    "youtube": "https://www.youtube.com/watch?v=36nPUZdlsjU",
+                    "registration": "https://student.maharashtra.gov.in/ad..."
+                },
+                "Sukanya samriddhi scheme": {
+                    "details": "Launched by: Government of India. Introduced in 2015 under the Beti Bachao Beti Padhao (BBBP) campaign. Objective: To encourage savings for the girl child's education and marriage. To promote financial security and empowerment of girls. Coverage: Applicable to all girl children in India. Parents/guardians can open an account in the name of the girl child at any post office or authorized bank.",
+                    "benefits": "High interest rate (generally higher than PPF). Tax benefits under Section 80C. Tax-free returns. Partial withdrawal (up to 50% of balance) allowed for higher education expenses after girl turns 18. Account matures after 21 years or on girl's marriage after 18 years.",
+                    "eligibility": "Girl child must be a resident Indian. Account can be opened from birth till the age of 10 years. Only one account per girl child. Maximum of two accounts per family (exceptions for twins/triplets).",
+                    "exclusions": "Non-resident Indians (NRIs) and foreign citizens. No multiple accounts allowed for the same child. No new deposits allowed after 21 years or girl's marriage after 18 years.",
+                    "application": "Visit nearest Post Office or authorized bank. Fill the Sukanya Samriddhi Account opening form. Submit required documents with initial deposit (₹250 minimum).",
+                    "documents": "Birth Certificate of the girl child, Identity Proof of parent/guardian, Address Proof of parent/guardian, Photograph of the child and parent/guardian, Initial deposit receipt.",
+                    "youtube": "https://www.youtube.com/watch?v=-SGneTb923c",
+                    "registration": "https://onlinesujeet1.blogspot.com/"
+                },
+                "Pradhan Mantri Uchchatar Shiksha Protsahan": {
+                    "details": "Launched by: Ministry of Education (Department of Higher Education). Objective: To provide financial support (scholarship) to meritorious students from economically weaker backgrounds for pursuing higher education (UG/PG/Professional courses). Promote equity in higher education by helping students who have done well in Class 12 (above 80th percentile) but whose families have limited income. Coverage: Students across India pursuing undergraduate, postgraduate, and professional courses. Fixed number of 82,000 fresh scholarships annually.",
+                    "benefits": "Scholarship amounts: ₹12,000 per annum for first 3 years of UG, ₹20,000 per annum for PG and later years of 5-year courses. Disbursement through Direct Benefit Transfer (DBT) into student's bank account.",
+                    "eligibility": "Must have passed Class 12 and be among top 80th percentile. Course must be a regular full-time degree. Family's gross income ≤ ₹4.5 lakh per annum. Should not be receiving benefits under another scholarship scheme.",
+                    "exclusions": "Students in diploma/correspondence/distance education courses. Students already availing another scholarship or financial aid scheme. Fresh applicants exceeding ₹4.5 lakhs income.",
+                    "application": "Apply online through the National Scholarship Portal (NSP). Verification via DigiLocker etc. Renewal in subsequent years subject to conditions like minimum marks and attendance.",
+                    "documents": "Identity proof (e.g. Aadhaar) and bank account details for DBT., Income certificate (fresh applicants), Marksheet of Class 12 / Board Examination certificate., Proof of admission/enrolment in the recognized institution.",
+                    "youtube": "https://www.youtube.com/watch?v=ERUbsUIDWCg",
+                    "registration": "https://scholarships.gov.in/"
+                },
+                "Prime Minister's Scholarship Scheme for the Wards/Widows of Central Police Force Personnel": {
+                    "details": "Launched: Government of India. Objective: Provide financial assistance to wards/widows of CAPFs, Assam Rifles, and State/UT Police personnel who were martyred or disabled in terror/naxal attacks. Promote equity and educational empowerment in families of martyrs and serving personnel. Coverage: Wards/widows of Central Armed Police Forces (CAPFs), Assam Rifles, and State/UT Police personnel. Applicable for professional degree courses only (Engineering, MBBS, etc.).",
+                    "benefits": "Scholarship amount: ₹3000/- for Girls, ₹2500/- for Boys per month. Duration: Till completion of professional degree course (maximum 5 years).",
+                    "eligibility": "Wards/widows of specified personnel. Must have secured minimum 60% marks in Class 12 / Diploma / Graduation. Age limit generally 18-25 years. Professional courses in recognized institutions (AICTE/UGC/MCI/State Government approved).",
+                    "exclusions": "Students pursuing courses through distance education, or correspondence. Students studying abroad. Only two wards/widows per family allowed. If a student fails or drops out, the scholarship is discontinued.",
+                    "application": "Apply online through National Scholarship Portal (NSP). Upload all required documents. Verification by concerned authorities. Sanction & release of scholarship directly to student's bank account via DBT.",
+                    "documents": "Identity Proof, Service Certificate, Proof of martyrdom/disability, Marksheet of Class 12 / Diploma / Graduation, Proof of admission to professional course, Bank Account details of student, Passport-size Photograph of student.",
+                    "youtube": "https://www.youtube.com/watch?v=DmbrOgtKZUs",
+                    "registration": "https://scholarships.gov.in/"
+                }
+            },
+            "Health": {
+                "ABPMJAY:- National Health Authority": {
+                    "details": "Launched by: Government of India. Implemented by the National Health Authority (NHA) under the Ministry of Health & Family Welfare. Launched on 23rd September 2018. Objective: To provide universal health coverage by offering free, quality healthcare service to poor and vulnerable families. To reduce out-of-pocket expenditure on medical treatment. To ensure access to secondary and tertiary care hospitalization for all eligible families. Coverage: Covers over 10.74 crore poor and vulnerable families (approx. 50 crore beneficiaries) as per SECC 2011 database. Provides a health insurance cover of ₹5 lakh per family per year.",
+                    "benefits": "Cashless and paperless treatment at empaneled hospitals. Coverage of 3 days pre-hospitalization and 15 days post-hospitalization expenses. Covers 1,500+ medical packages, including surgeries, medicines, diagnostics, and treatment. Portability - beneficiaries can avail services anywhere in India. Women, children, and senior citizens given special priority.",
+                    "eligibility": "Beneficiaries identified based on Socio-Economic Caste Census (SECC) 2011 data. Rural households: Deprived categories such as landless, manual labourers, SC/ST households, women-headed families, etc. Urban households: Identified workers such as rag pickers, street vendors, domestic workers, drivers, sanitation.",
+                    "exclusions": "Individuals with government health schemes (e.g., Central Govt. Health Scheme, ESIC). Income tax payers and higher-income families. Households with pucca houses, motorized vehicles, or higher-income criteria.",
+                    "application": "No formal enrollment fee - eligibility decided from SECC 2011. Beneficiaries can check eligibility via: PM-JAY official website (mera.pmjay.gov.in), Ayushman Mitra at empaneled hospitals, Call Centre (14555/1800-111-565).",
+                    "documents": "Aadhaar Card / Ration Card - For family identification., Family ID / SECC ID - Proof of eligibility., Residence Proof - Voter ID, electricity bill, etc., Income Certificate - If required for verification., Passport-size Photographs - For records.",
+                    "youtube": "https://www.youtube.com/watch?v=Tt5uJawMvcQ",
+                    "registration": "https://beneficiary.nha.gov.in/"
+                },
+                "PMJAY - Beneficiary Portal": {
+                    "details": "Launched by: National Health Authority (NHA), Ministry of Health & Family Welfare. Part of Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (AB-PMJAY). Objective: To provide a digital platform for citizens to check eligibility, register, and access health benefits under PM-JAY. To make verification and service access transparent, simple, and paperless. Coverage: Accessible to all potential PM-JAY beneficiaries across India. Based on Socio-Economic Caste Census (SECC) 2011 data and state-specific databases. Used by citizens, hospitals, and officials for beneficiary identification and e-card generation.",
+                    "benefits": "Allows families to check eligibility online using Aadhaar, ration card, or mobile number. Enables beneficiaries to download Ayushman (PM-JAY) e-card for cashless treatment. Provides details of empaneled hospitals and treatment packages. Real-time status tracking of applications and services. Paperless and portable system across all empaneled hospitals in India.",
+                    "eligibility": "Families identified under SECC 2011 deprivation criteria (rural & urban poor). Specific categories such as landless labourers, SC/ST households, manual workers, rag pickers, domestic workers, etc. Must not be part of excluded higher-income groups.",
+                    "exclusions": "Families not listed in SECC 2011 database. Households already covered under other government health insurance schemes. High-income households (as per SECC exclusion filters).",
+                    "application": "Visit the official portal: mera.pmjay.gov.in. Enter details like mobile number, ration card, or Aadhaar number. Check eligibility status online. If eligible, generate and download Ayushman e-card. Present e-card at empaneled hospital for cashless treatment.",
+                    "documents": "Aadhaar Card - For verification and e-KYC., Ration Card / Family ID - To confirm family eligibility., Residence Proof - Voter ID, electricity bill, etc., Mobile Number - For OTP verification., Passport-size Photograph - For e-card issuance.",
+                    "youtube": "https://www.youtube.com/watch?v=Tt5uJawMvcQ",
+                    "registration": "https://beneficiary.nha.gov.in/"
+                },
+                "Abha": {
+                    "details": "Launched by: National Health Authority (NHA), Ministry of Health & Family Welfare. Part of the Ayushman Bharat Digital Mission (ABDM), launched in September 2021. Objective: To create a unique digital health ID for every citizen of India. To enable secure, paperless, and portable digital storage of health records. To make healthcare accessible, interoperable, and efficient across hospitals, clinics, and labs. Coverage: Any citizen of India can create an ABHA number (voluntary).",
+                    "benefits": "Provides a 14-digit unique ABHA number that works as a digital health identity. Stores medical history such as prescriptions, lab reports, vaccination details, and discharge summaries. Enables paperless consultations with doctors across India. Consent-based data sharing - patients control who accesses their records. Increases efficiency by reducing duplication of tests and improving treatment continuity.",
+                    "eligibility": "Any resident Indian citizen with valid ID proof (Aadhaar, Driving License, etc.). Individuals of all age groups can register.",
+                    "exclusions": "Foreign nationals without valid Indian ID proof. Citizens not willing to opt in (ABHA is voluntary, not mandatory).",
+                    "application": "Visit official website: healthid.ndhm.gov.in or use ABHA mobile app. Register using Aadhaar number or Driving License. Provide mobile number for OTP verification. Generate 14-digit ABHA number instantly. Download ABHA card or use the digital ID for healthcare services.",
+                    "documents": "Aadhaar Card or Driving License (for ID verification)., Mobile Number (for OTP-based authentication)., Email ID (optional, for communication)., Passport-size Photograph (optional for digital card).",
+                    "youtube": "https://www.youtube.com/watch?v=-XqT2gbVc94",
+                    "registration": "https://abha.abdm.gov.in/abha/v3/"
+                },
+                "Atal Pension Yojana": {
+                    "details": "Launched by: Government of India through the Ministry of Finance. Administered by the Pension Fund Regulatory and Development Authority (PFRDA). Launched in May 2015. Objective: To provide a universal social security system for workers in the unorganized sector. To ensure a fixed pension after retirement (age 60), reducing old-age vulnerability. Coverage: All citizens of India aged 18-40 years. Especially aimed at unorganized sector workers like laborers, farmers, domestic help, small trades, etc.",
+                    "benefits": "Guaranteed pension of ₹1,000-5,000 per month (depending on contribution). Pension starts from age 60 and continues for lifetime. After subscriber's death - spouse gets pension; after spouse's death - nominee receives accumulated corpus. Government co-contribution (for eligible early subscribers) of 50% of the contribution or ₹1,000/year (whichever is lower) for 5 years.",
+                    "eligibility": "Age between 18-40 years. Must have a savings bank account. Must contribute for a minimum of 20 years. Subscriber should not be covered under any statutory social security schemes (EPF, NPS).",
+                    "exclusions": "Individuals above 40 years of age. Taxpayers (from October 2022 onwards, income taxpayers are not eligible to join APY). Citizens already covered under EPF/NPS/ESIC.",
+                    "application": "Visit any bank branch or post office. Fill the APY registration form. Provide Aadhaar card, mobile number, and bank account details. Choose pension amount and contribution period. Contributions are auto-debited from savings account on a monthly/quarterly/half-yearly basis.",
+                    "documents": "Aadhaar Card, Bank Account Details, Mobile Number, Nominee Details.",
+                    "youtube": "https://youtu.be/FKIWVHHtxnA?si=jNfus8HX-Bub9HOt",
+                    "registration": "https://enps.nps-proteantech.in/eNPS/ApySubRegistration.html"
+                },
+                "Rashtriya Swasthya Bima Yojana (RSBY)": {
+                    "details": "Launched by: Government of India, Ministry of Labour and Employment. Officially launched in 2008. Objective: To provide health insurance coverage to below poverty line (BPL) families. Reduce the financial burden of medical treatment for poor households. Provide cashless hospitalization facilities. Coverage: Initially targeted BPL families, later extended to Street vendors, MNREGA workers, construction workers, domestic workers, etc. Coverage for five members per family. Provides insurance up to ₹30,000 per family per year on a family floater basis.",
+                    "benefits": "Cashless hospitalization in empaneled hospitals. Coverage includes pre-existing conditions. Covers transport allowance (₹100 per visit, up to ₹1000 annually). Beneficiaries get a biometric-enabled smart card. Portability - card can be used across India in any RSBY empaneled hospital. No age limit.",
+                    "eligibility": "Belong to BPL category (as per SECC data or State BPL list). Certain unorganized sector workers (construction, domestic, street vendors, etc.) are also eligible. Maximum five members per family can be enrolled.",
+                    "documents": "Identity Proof (Aadhaar, Voter ID, etc.), BPL Card / Poverty Certificate, Age Proof, Ration Card (for family details), Photographs of family members, Occupational certificate (if applicable).",
+                    "youtube": "https://youtu.be/fRQDVg_SvKw?si=eEVo_fP97r94mSdV",
+                    "registration": "http://www.rsby.gov.in/how_works.html"
+                }
+            },
+            "Construction": {
+                "Maharashtra Real Estate Regulatory Authority": {
+                    "details": "Launched by: Government of India under the Real Estate (Regulation and Development) Act, 2016 (RERA). Maharashtra was the first state to establish its Real Estate Regulatory Authority on 1st May 2017. Objective: To regulate and promote the real estate sector in Maharashtra. Ensure transparency, accountability, and efficiency in real estate projects. Protect the interest of homebuyers while ensuring fair practices by developers. Establish a fast grievance redressal mechanism for buyers and developers.",
+                    "benefits": "Transparency - Developers must register projects and disclose project details. Protection for buyers - Mandatory use of 70% of funds collected from buyers in an escrow account. Timely delivery - Developers are liable to pay penalties/compensation for project delays. Grievance redressal - Buyers and developers can approach MahaRERA for disputes. Accountability of agents - Real estate agents must register with MahaRERA. Online access - Buyers can check registered projects and complaints online.",
+                    "eligibility": "Developers/Promoters: Must register their projects under MahaRERA before advertising, marketing, or selling. Real Estate Agents: Must register with MahaRERA to operate legally. Homebuyers: Eligible to file complaints and seek redressal under MahaRERA.",
+                    "documents": "PAN card of the promoter, Legal title deed and proof of ownership of land, Encumbrance certificate, Details of project plan, Sanctioned plan and commencement certificate, Details of engineers, architects, contractors, PAN and Aadhaar of partners/directors, Project bank account details (escrow). For Agent Registration: PAN & Aadhaar card, Address proof, Company registration documents, Photograph. For Homebuyers: Proof of identity, Property documents, Payment proofs, Details of grievance/complaint.",
+                    "youtube": "https://youtu.be/ebQe3UXH4zk?si=gLNZm2XOcsSvL40T",
+                    "registration": "maharerait.mahaonline.gov.in"
+                },
+                "Swachh Bharat Mission – Gramin (SBM-G)": {
+                    "details": "Launched by: Government of India, Ministry of Drinking Water and Sanitation (now Ministry of Jal Shakti). Launched on 2nd October 2014. Objective: To eliminate open defecation in rural India. Ensure access to safe sanitation facilities for every rural household. Promote clean and hygienic environment in villages. Improve health outcomes by reducing water-borne diseases. Encourage behavioral change towards hygiene practices.",
+                    "benefits": "Financial assistance for construction of toilets (IHHL). Improved sanitation infrastructure. Reduction in diseases. Improved dignity and safety, especially for women and girls. Contribution to ODF (Open Defecation Free) status of villages.",
+                    "eligibility": "Rural households without a toilet are eligible. Priority given to BPL families, SC/ST households, households with disabled persons, and households headed by women. Households already having functional toilets are not eligible for subsidy.",
+                    "documents": "Identity Proof, Address Proof, BPL Card / Poverty certificate, Caste Certificate, Bank Account details, Photograph of applicant and household, Application form prescribed under SBM-G.",
+                    "youtube": "https://youtu.be/xfqG-LKXD1k?si=Dc9a3xdBExWpI_mf",
+                    "registration": "https://www.sarkaridna.com/?s=sauchalay"
+                },
+                "Pradhan Mantri Awas Yojana – Gramin": {
+                    "details": "Launched by: Government of India, Ministry of Rural Development (MoRD). Launched in April 2016. Objective: To provide 'Housing for All' in rural areas by 2024. Ensure pucca houses with basic amenities for the rural poor. Improve quality of life and dignity of the rural population. Promote inclusive growth by targeting vulnerable groups. Coverage: All rural households who are homeless or living in kaccha houses/dilapidated houses. Prioritization based on Socio-Economic and Caste Census (SECC) 2011 data.",
+                    "benefits": "Financial assistance: ₹1.20 lakh per house in plain areas, ₹1.30 lakh in hilly/difficult/IAP areas. Convergence benefits: MGNREGA, Swachh Bharat Mission – Gramin, Saubhagya / Ujjwala Yojana. Houses built with disaster-resilient technology. Beneficiary gets direct transfer of funds (DBT). Women empowerment - ownership is preferably in the name of female member or jointly with spouse.",
+                    "eligibility": "Rural households without a pucca house or living in 0/1/2 room kutcha houses. Priority given to SC, ST, Minority communities, BPL families, landless households, widows, differently-abled, transgender, and other vulnerable groups. Selection based on SECC 2011 data + Gram Sabha verification.",
+                    "documents": "Identity Proof, Address Proof, SECC 2011 data inclusion proof, Bank Account details, MGNREGA job card (if available), Caste Certificate (for SC/ST households), Disability Certificate (if applicable), Photograph of the applicant and kutcha house.",
+                    "youtube": "https://youtu.be/NJ8aHwR3aYE?si=gWqt708vajiYNnVc",
+                    "registration": "https://pmay-urban.gov.in/"
+                },
+                "Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)": {
+                    "details": "Launched by: Government of India, Ministry of Rural Development. Enacted in September 2005. Objective: To provide legal guarantee of 100 days of wage employment in a financial year to every rural household whose adult members volunteer for unskilled manual work. Create durable rural assets and infrastructure. Strengthen livelihood security in rural areas. Promote inclusive growth and reduce migration. Coverage: Applies to all districts in India, except those with 100% urban population.",
+                    "benefits": "Employment Guarantee - 100 days of wage employment per rural household per year. Timely wages - payment within 15 days (DBT). Infrastructure creation - development of rural assets like roads, water conservation structures, etc. Women empowerment - At least 1/3rd of beneficiaries are women. Social inclusion - Priority to SC, ST, and marginalized groups. Reduced migration.",
+                    "eligibility": "Applicant must be a citizen of India, aged 18 years or above, belonging to a rural household, and willing to do unskilled manual work. One job card per household (covering all adult members).",
+                    "documents": "Identity Proof, Age Proof, Residence Proof, Photograph of applicant, Bank/Post office account details, Caste Certificate (if applicable), Job Card application form.",
+                    "youtube": "https://youtu.be/vet_w8oPQ44?si=mUGF0KK8OAI1of19",
+                    "registration": "https://nrega.dord.gov.in/MGNREGA_new/Nrega_home.aspx"
+                },
+                "Rural Infrastructure Development Fund (RIDF)": {
+                    "details": "Launched by: Government of India in 1995-96, announced in the Union Budget. Implemented through NABARD (National Bank for Agriculture and Rural Development). Objective: To provide low-cost loans to State Governments and State-owned corporations for creating rural infrastructure. Speed up completion of rural infrastructure projects in agriculture and allied sectors. Promote sustainable rural development and improve living standards in villages. Support employment generation by creating durable assets. Coverage: Covers all states and UTs of India.",
+                    "benefits": "Financial support for states to build critical rural infrastructure. Timely completion of stalled/ongoing projects. Improves agriculture productivity. Enhances rural connectivity. Better health, education, and sanitation facilities. Promotes inclusive growth. Generates rural employment.",
+                    "eligibility": "State Governments / Union Territories and their agencies (primary borrowers). State-owned corporations engaged in rural infrastructure development. Projects must be in line with the list of eligible activities defined by NABARD.",
+                    "documents": "Detailed Project Report (DPR), Approval/Sanction from the State Government, Administrative sanction & expenditure approval, Land ownership and clearance certificates, Environment/forest clearances, Utilization certificate of previous loans/grants, Project implementation schedule, Bank account details of implementing agency.",
+                    "youtube": "https://youtu.be/sTT0_DYOP8s?si=i6qN67d0lEkVnBgT",
+                    "registration": "ridf.nabard.org"
+                }
+            },
+            "Women Empowerment": {
+                "Pradhan Mantri Ujjwala Yojana": {
+                    "details": "Launched: Government of India Ministry of Petroleum & Natural Gas. Launched in 1st May 2016. Objective: Provide clean cooking fuel (LPG) to poor households, especially rural women. Protect health of women & children by reducing smoke from traditional cooking. Empower women and promote gender equality by giving them ownership of LPG connections. Reduce deforestation and indoor air pollution. Coverage: BPL (Below Poverty Line) families identified through Socio-Economic Caste Census (SECC) 2011.",
+                    "benefits": "Free LPG connection in the name of women of BPL households. Initial financial support: ₹1600 per connection. Option to buy stove & first refill on EMI. Each eligible household entitled to one LPG connection. Women empowerment through household ownership. Health benefits by reducing indoor pollution & smoke-related diseases.",
+                    "eligibility": "Woman applicant must be above 18 years of age. Must belong to a BPL household. Household should not already have an LPG connection. Priority given to SC, ST, minorities, and weaker sections.",
+                    "exclusions": "Households already having an LPG connection. Applicants not in the BPL category. Duplicate connections in the same household not permitted.",
+                    "application": "Collect application form from LPG distributor or download from official PMUY website. Fill in personal & family details, attach required documents. Submit form at the nearest LPG distributor. After verification, LPG connection issued in the woman's name.",
+                    "documents": "Identity Proof, Proof of Residence, BPL Card / SECC data certificate, Caste Certificate (if applicable), Bank Account details of applicant, Passport-size Photograph of applicant.",
+                    "youtube": "https://www.youtube.com/watch?v=iSFdzzBwnJE",
+                    "registration": "https://pmuy.gov.in/e-kyc.html"
+                },
+                "Pradhan Mantri Matru Vandana Yojana": {
+                    "details": "Launched: Government of India Ministry of Women & Child Development (MWCD) in 2017. Objective: Provide maternity benefits to pregnant women and lactating mothers. Compensate for wage loss during pregnancy and after childbirth. Improve health-seeking behavior of mothers and promote safe delivery & breastfeeding practices. Reduce maternal and infant mortality. Coverage: Pregnant women and lactating mothers across India. For first living child of the family.",
+                    "benefits": "Cash incentive of ₹5,000 provided in three installments. Incentive is in addition to JSY benefits (₹1,000). Total benefit = ₹6,000. Amount transferred directly into beneficiary's Aadhaar-linked bank account.",
+                    "eligibility": "Women aged 19 years or above. Pregnant women and lactating mothers for first child (or second child if girl under PMMVY 2.0). Must register pregnancy at AWC/approved health centre. Aadhaar and bank account required for DBT.",
+                    "exclusions": "Women in regular employment with Central/State Government or PSUs. Women receiving similar maternity benefits under other laws/schemes. Pregnancies before 19 years of age.",
+                    "application": "Register at nearest Anganwadi Centre (AWC) / approved health facility. Fill out prescribed PMMVY application forms. Submit with required documents. Installments released in beneficiary's bank account through DBT.",
+                    "documents": "Identity Proof, Age Proof, Pregnancy Proof, Bank Account details, Photograph of applicant, Husband's Aadhaar (sometimes required for verification).",
+                    "youtube": "https://www.youtube.com/watch?v=YAXqACXk4po",
+                    "registration": "https://pmmvy.wcd.gov.in/Home/TrainingVideo#featured-services"
+                },
+                "RMEWF-Financial Assistance For Vocational Training Of Widows Of Ex- Servicemen": {
+                    "details": "Launched: Government of India. Implemented by Raksha Mantri Ex-Servicemen Welfare Fund (RMEWF). Objective: To provide financial assistance for skill development and vocational training of widows of Ex-Servicemen. Promote self-reliance, employability, and livelihood opportunities. Ensure socio-economic rehabilitation. Coverage: Widows of Ex-Servicemen across India. Vocational training can be pursued in recognized vocational training institutes / ITIs / polytechnics. Maximum assistance for up to 2 years.",
+                    "benefits": "Financial grant of ₹20,000/- (as a one-time assistance). Paid directly to the widow. Helps cover tuition fees, training material, and related expenses.",
+                    "eligibility": "Applicant must be a widow of an Ex-Serviceman. Should be enrolled in a recognized vocational training course. Must apply through Rajya Sainik Board (RSB) / Zila Sainik Board (ZSB). Should not be receiving similar financial assistance under any other scheme.",
+                    "exclusions": "Widows not enrolled in recognized training institutes. Those already employed in regular service. Applicants receiving assistance for the same course from another government scheme.",
+                    "application": "Application form available at Zila Sainik Board (ZSB) / Rajya Sainik Board (RSB). Fill in details along with necessary documents. ZSB forwards application to RSB, then to Central Government for sanction. Assistance released through DBT.",
+                    "documents": "Identity Proof, Service Documents of Ex-Serviceman, Death Certificate of Ex-Serviceman, Proof of Admission in recognized vocational training institute, Bank Account details, Photographs of applicant.",
+                    "youtube": "http://www.youtube.com/watch?v=AdfR5CwHsMs",
+                    "registration": "https://desw.gov.in/[field_url]"
+                },
+                "Women Scientist Scheme-C": {
+                    "details": "Launched: Government of India, managed by Nodal Ministry (Department of Science & Technology (DST)) in 2002. Objective: To provide opportunities to women scientists & technologists who had a career break. To train them in intellectual property rights (IPR), patents, and related areas. To create a pool of women professionals in the field of IPR, patents, and technology mgt. Coverage: Women scientists & technologists across India. One-year training in IPR and patent law at recognized institutions.",
+                    "benefits": "Fellowship (monthly stipend): ₹20,000- for MSc/PG, ₹25,000- for M.Tech/PhD. Training support in IPR, patents, trademarks, copyright, and design. Hands-on experience in patent filing. Certification after completion of training.",
+                    "eligibility": "Indian women citizens. Qualification: Post-graduates in Science/Engineering/Technology/Medicine or PhD in relevant fields. Age limit: 27-45 years (relaxation for SC/ST/OBC/PH). Preference to women who had a career break.",
+                    "exclusions": "Male candidates not eligible. Women already employed in permanent positions. Applicants without relevant educational qualifications.",
+                    "application": "Apply online through DST portal. Submit filled application with CV, qualifications, and proof of career break. Shortlisted candidates undergo written test & interview. Selected candidates are assigned training centres.",
+                    "documents": "Identity Proof, Educational Certificates, Proof of Age, Proof of Career Break (if applicable), Caste/Category Certificate (if SC/ST/OBC).",
+                    "youtube": "https://youtu.be/d6jA1hxPYe0?si=YvDoc6tgC2tsNZIh",
+                    "registration": "https://www.biotecnika.org/2023/01/wise-post-doctoral-fellowship-wise-pdf-call-for-proposals-open/"
+                },
+                "Savitribai Jyotirao Phule Fellowship For Single Girl Child": {
+                    "details": "Launched: Government of India Nodal Body (University Grants Commission (UGC) in 2023. Objective: Promote higher education of single girl child in India. Encourage parents to educate daughters at the doctoral level. Support research work (Ph.D.) of single girl child. Reduce gender inequality in higher education. Coverage: Open to single girl child candidates enrolled in a Ph.D. programme in recognized universities. Applicable to all subjects/disciplines.",
+                    "benefits": "Fellowship Amount: ₹31,000 per month (JRF level), ₹35,000 per month (SRF level). Contingency Grant: ₹10,000-₹12,000 per annum. Tenure: 5 years (maximum). House Rent Allowance (HRA) as per UGC rules.",
+                    "eligibility": "Applicant must be a single girl child (no siblings). Must have taken admission in a regular, full-time Ph.D. programme. Age limit: 40 years (General), 45 years (SC/ST/OBC/PwD/Transgender).",
+                    "exclusions": "Candidates already receiving fellowship/scholarship from any other government scheme. Part-time/distance education Ph.D. candidates. Second girl child in the family.",
+                    "application": "Apply online through the UGC portal (scholarships.gov.in / UGC website). Submit filled application with required documents. Selection on the basis of UGC NET-JRF/Ph.D. admission and eligibility criteria. Fellowship released through Direct Benefit Transfer (DBT).",
+                    "documents": "Aadhaar / Identity proof, Proof of Admission in Ph.D. programme, Certificate from parents declaring the candidate as a single girl child, Age proof, Caste certificate (if applicable), Bank account details (Aadhaar-linked).",
+                    "youtube": "https://www.youtube.com/watch?v=EGopb94-YrY",
+                    "registration": "https://hmas.mahait.org/"
+                }
+            }
+        };
+
+        const pages = ['home-page', 'schemes-page'];
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const schemesList = document.getElementById('schemes-list');
+        const schemesHeading = document.getElementById('schemes-heading');
+        const schemeModal = document.getElementById('scheme-modal');
+        const modalContent = document.getElementById('modal-content');
+        const alertBox = document.getElementById('alert-box');
+
+        // Function to show a specific page and hide others
+        function showPage(pageId) {
+            pages.forEach(id => {
+                const page = document.getElementById(id);
+                if (page) {
+                    page.classList.remove('active');
+                }
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0); // Scroll to top on page change
+        }
+
+        // Function to show domain-specific schemes
+        function showDomain(domain) {
+            schemesHeading.textContent = domain + " Schemes";
+            schemesList.innerHTML = '';
+            
+            const schemes = data[domain];
+            if (!schemes) {
+                showAlert('Content not found for this domain.');
+                showPage('home-page');
+                return;
+            }
+
+            for (const schemeName in schemes) {
+                const schemeButton = document.createElement('button');
+                schemeButton.className = 'scheme-card bg-gray-800 text-white p-6 rounded-xl shadow-md text-left transition transform hover:bg-gray-700';
+                schemeButton.innerHTML = `<h3 class="text-xl font-semibold">${schemeName}</h3>`;
+                schemeButton.onclick = () => showSchemeDetails(domain, schemeName);
+                schemesList.appendChild(schemeButton);
+            }
+
+            showPage('schemes-page');
+        }
+
+        // Function to show scheme details in a modal
+        function showSchemeDetails(domain, schemeName) {
+            const scheme = data[domain][schemeName];
+            if (!scheme) {
+                showAlert('Scheme details not found.');
+                return;
+            }
+
+            let htmlContent = `
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">${schemeName}</h2>
+                <div class="space-y-6 text-gray-700">
+            `;
+            const sections = ['details', 'benefits', 'eligibility', 'exclusions', 'application', 'documents'];
+            sections.forEach(section => {
+                if (scheme[section]) {
+                    htmlContent += `
+                        <div>
+                            <span class="modal-item-title">${section.charAt(0).toUpperCase() + section.slice(1)}:</span>
+                            <p class="leading-relaxed">${scheme[section]}</p>
+                        </div>
+                    `;
+                }
+            });
+
+            htmlContent += `
+                    <div class="flex flex-col md:flex-row gap-4 pt-4">
+                        <a href="${scheme.youtube}" target="_blank" class="flex-1 bg-red-600 text-white text-center py-3 px-6 rounded-lg shadow-md hover:bg-red-700 transition">
+                            Watch on YouTube
+                        </a>
+                        <a href="${scheme.registration}" target="_blank" class="flex-1 bg-green-600 text-white text-center py-3 px-6 rounded-lg shadow-md hover:bg-green-700 transition">
+                            Register Now
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            modalContent.innerHTML = htmlContent;
+            schemeModal.classList.remove('hidden');
+        }
+
+        // Function to hide the modal
+        function hideModal() {
+            schemeModal.classList.add('hidden');
+        }
+
+        // Function to show an alert message
+        function showAlert(message) {
+            alertBox.textContent = message;
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Mobile menu toggle
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function hideMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Initial check for active page
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home-page');
+        });
+    </script>
+</body>
+</html>
